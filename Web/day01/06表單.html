@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--
+placeholder 佔位文本
+value 設置默認值
+maxlength 最大字符長度
+readonly 只讀(寫屬性名即可)
+-->
+
+<h1>註冊頁面</h1>
+<form action="https://www.google.com.tw/">
+
+  用戶名:<input type="text" name="username" value="elijah" placeholder="請輸入文字" maxlength="5" readonly><br>
+  密碼:<input type="password" placeholder="請輸入密碼" name="password"><br>
+  姓別:<input type="radio" name="gender" value="m">男 <input type="radio" name="gender" checked value="w">女<br>
+  興趣愛好:<input type="checkbox" name="hobby" value="pb">打羽球
+    <input type="checkbox" name="hobby" value="dr"> 喝飲料
+    <input type="checkbox" name="hobby" checked value="an">任何事<br>
+  生日:<input type="date" name="birthday"><br>
+  圖片上傳:<input type="file" name=""pic><br>
+  所在地:
+    <select name="city">
+        <option value="nat">南投</option>
+        <option selected value="taic">台中</option>
+        <option value="taipa">台北</option>
+        <option>高雄</option>
+        <option>彰化</option>
+        <option>雲林</option>
+        <option>嘉義</option>
+    </select><br>
+
+    <input type="submit" value="註冊">
+    <input type="reset">
+    <input type="button" value="自訂義按鈕"><br>
+    <br>
+    <button type="submit">註冊</button>
+    <button type="reset">重置</button>
+    <button type="button">自訂義按鈕</button>
+
+
+
+
+
+
+
+</form>
+
+
+</body>
+</html>
