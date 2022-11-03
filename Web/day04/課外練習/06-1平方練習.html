@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text">
+<input type="button" value="平方" onclick="f()">
+<div>結果:</div>
+<script>
+    let i = document.querySelector("input")
+    let d = document.querySelector("div")
+    function f() {
+         d.innerText = "結果:"+ i.value*i.value;
+    }
+</script>
+</body>
+</html>

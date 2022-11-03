@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+<input type="text" placeholder="請輸入數量: ">
+<input type="button" value="帥哥" onclick="f(1)">
+<input type="button" value="美女" onclick="f(2)">
+<hr>
+<script>
+    let input = document.querySelector("input")
+    function f(x) {
+        for (let i = 0; i < input.value; i++) {
+            imgURL = x==1?"boy.jpg":"girl.jpg";
+            // 創建一個img文件
+            let img = document.createElement("img")
+            // 把img附上連結
+            img.src = imgURL;
+            // 新增到頁面
+            document.body.append(img)
+        }
+    }
+</script>
+</body>
+</html>

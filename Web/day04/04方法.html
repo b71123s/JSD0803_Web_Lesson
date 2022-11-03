@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function f1() {
+        console.log("成功輸出f1");
+    }
+    f1();
+
+    function f2(name,age) {
+        console.log(name+':'+age+'歲');
+    }
+    f2("eliah",22);
+
+    function f3(){
+        return "我是返回值";
+    }
+    let info = f3();
+    console.log(info);
+
+    function f4(x,y) {
+        return x*y
+    }
+    let result = f4(5,8);
+    console.log(result);
+
+    let f5 = function (x,y) {
+        console.log(x*x*y)
+    }
+    f5(3,8);
+
+    let f6 = new Function("name","age","console.log(name+':'+age)");
+    f6("jim","23");
+
+    console.log("--------------------------------")
+
+    function f7(){
+        console.log("f7");
+    }
+    f7();
+
+    function f8(name,age) {
+        console.log(name+":"+age);
+    }
+    f8("tim",65);
+
+    function f9() {
+        return "f9"
+    }
+    let info = f9();
+    console.log(info);
+
+</script>
+</body>
+</html>

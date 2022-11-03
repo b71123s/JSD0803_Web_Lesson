@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text">
+<input type="button" value="平方" onclick="f()">
+<div>結果:</div>
+<script>
+    function f(x) {
+        let i = document.querySelector("input");
+        let  d = document.querySelector("div");
+
+        if(isNaN(i.value)){
+            d.innerText = "輸入錯誤"
+            return;
+        }
+        // 乘 : 寫法一
+        d.innerText = "結果:"+(i.value)*(i.value);
+        // 乘 : 寫法二
+        // d.innerText = "結果:"+parseFloat(i.value)*parseFloat(i.value);
+        // 加 : 寫法1，要加上*1轉乘數值，只有加需要
+        // d.innerText = "結果:"+(i.value*1+i.value*1)
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>0</h1>
+<script>
+    let count = 0;
+    let h = document.querySelector("h1")
+    setInterval(f,1000)
+    function f() {
+        count++
+        h.innerText = count
+    }
+
+    let timer = setInterval(function () {
+        console.log(count)
+        if (count==5){
+            clearInterval(timer)
+        }
+    },1000)
+
+    setTimeout(function () {
+        alert("time's out!!!")
+    },3000)
+</script>
+</body>
+</html>

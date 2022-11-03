@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 20%;
+            height: 25%;
+        }
+    </style>
+</head>
+<body>
+<input type="text" placeholder="請輸入數量~">
+<input type="button" value="帥哥" onclick="f(1)">
+<input type="button" value="美女" onclick="f(2)">
+<hr>
+<script>
+    let input = document.querySelector("input")
+    function f(x) {
+        for (let i = 0; i < input.value; i++) {
+            // 先判定為1還2，併放入imgURL參數內
+            let imgURL = x==1?"boy.jpg":"girl.jpg";
+            // 先創建img
+            let img = document.createElement("img")
+            // 付值src
+            img.src = imgURL;
+            // 新增到body頁面
+            document.body.append(img);
+        }
+
+
+    }
+</script>
+</body>
+</html>
