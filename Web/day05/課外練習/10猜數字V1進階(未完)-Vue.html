@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input type="text"  placeholder="請輸入1~100的任意整數" v-model="info">
+    <input type="button" value="我猜" @click="f()" >
+    <div>結果:{{result}}</div>
+</div>
+<script src="../js/vue.min.js"></script>
+<script>
+    let x = parseInt(Math.random()*100)+1;
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            info:"",
+            result:"",
+            back:"",
+            step:""
+        },
+        methods:{
+            f(){
+                v.step = v.info;
+
+                if (v.info>x){
+
+                    v.result = "在輸入小一點，介於" +v.info+"到"+v.back+"_"+x
+                }else if (v.info<x){
+
+                    v.result = "在輸入大一點，介於" +v.info+"到"+ v.back+"_"+x
+                }else {
+                    v.result = "賓果"
+                }
+
+                v.back = v.step;
+            }
+        }
+    })
+</script>
+</body>
+</html>

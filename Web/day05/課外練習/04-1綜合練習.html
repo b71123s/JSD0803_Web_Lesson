@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    img{
+      width: 40%;
+    }
+  </style>
+</head>
+<body>
+
+<h1>個人信息</h1>
+<table border="1">
+  <tr>
+    <td>照片:</td><td id="picture_id"></td>
+  </tr>
+  <tr>
+    <td>姓名:</td><td id="name_id"></td>
+  </tr>
+  <tr>
+    <td>年齡:</td><td id="age_id"></td>
+  </tr>
+  <tr>
+    <td>好友:</td><td id="friend_id"></td>
+  </tr>
+</table>
+
+<input type="button" value="一鍵來帥" onclick="f()">
+
+<script>
+  let person = {pic:"boy.jpg",name:"網帥",age:"年齡",friends:["逍遙","靈兒","林月如","李大娘"]}
+  let nameTd = document.querySelector("#name_id")
+  let ageTd = document.querySelector("#age_id")
+  let pictureTd = document.querySelector("#picture_id")
+  let friendTd = document.querySelector("#friend_id")
+  function f() {
+    /* 文字年齡新增到頁面 */
+    nameTd.innerText = person.name;
+    ageTd.innerHTML = person.age;
+
+    /* 圖片新增到頁面 */
+    // 1.新增img物件
+    let img = window.document.createElement("img")
+    // 2.img物件src附值
+    let imgURL = person.pic
+    img.src = imgURL;
+    // 3.將picture_id內顯示img物件
+    pictureTd.append(img)
+
+    /* 好友新增到頁面，列表式方式 */
+    // 1.創建ul物件
+    let ul = document.createElement("ul")
+
+    // 2.創建il物件
+
+    // 3.遍歷friend內的朋友，寫到li上
+    // 4.friend新增到li
+    // 5.ul新增到friend_id，顯示頁面
+    for (let friend of person.friends) {
+      let li = document.createElement("li")  // 不可放到外面，每次都要在創建一個
+      li.innerText = friend;
+      ul.append(li);
+    }
+    friendTd.append(ul)
+
+
+  }
+</script>
+
+
+</body>
+</html>

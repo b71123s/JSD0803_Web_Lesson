@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    {{info}}
+    <b>{{info}}</b>
+    <hr>
+<!--    下兩個呈現出來效果一樣-->
+    <p>{{info}}</p>
+<!--    v-text讓元素文本內容和變量進行綁定，並內中標籤以文本呈現-->
+    <p v-text="info"></p>
+<!--    v-html讓元素文本內容和變量進行綁定，並內中標籤會解讀出來-->
+    <p v-html="info"></p>
+</div>
+<script src="js/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            info:"文本相關<b>加粗</b>"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  {{info}}
+<!--  屬性綁定，簡寫-->
+  <input type="text" :value="info">
+<!--屬性綁定，完整寫法  -->
+  <input type="text" v-bind:value="info">
+  <a :href="url">超連接</a>
+  <img :src="imgname" alt="">
+
+
+
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el:"body>div",
+    data:{
+      info:"屬性綁定測試",
+      url:"http://google.com",
+      imgname:"boy.jpg"
+    }
+  })
+</script>
+</body>
+</html>

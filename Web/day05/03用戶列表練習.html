@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <caption>用戶列表</caption>
+    <tr>
+        <th>用戶名</th>
+        <th>密碼</th>
+        <th>暱稱</th>
+    </tr>
+</table>
+<script>
+// 準備數組
+let table = document.querySelector("table")
+let arr = [
+    {username:"elijah",password:"e123",nickname:"e"},
+    {username:"jimmy",password:"j123",nickname:"j"},
+    {username:"tony",password:"t123",nickname:"t"}
+]
+for (let p of arr) {
+
+    let tr = document.createElement("tr")
+    let usernameTd = document.createElement("td")
+    let passwordTd  = document.createElement("td")
+    let nicknameTd  = document.createElement("td")
+
+    usernameTd.innerText = p.username
+    passwordTd.innerText = p.password
+    nicknameTd.innerText = p.nickname
+
+    tr.append(usernameTd,passwordTd,nicknameTd)
+    table.append(tr)
+
+}
+
+</script>
+</body>
+</html>

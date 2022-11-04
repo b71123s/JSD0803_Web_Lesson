@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <caption>商品列表</caption>
+    <tr>
+        <th>商品標題</th><th>價格</th>
+        <th>銷量</th><th>庫存</th>
+    </tr>
+</table>
+
+
+
+<script>
+
+    let p1 = {}
+
+    p1.name = "elijah"
+    p1.age = "25"
+    p1.run = function () {
+        console.log(this.name+":"+this.age)
+    }
+    p1.run();
+
+    let p2 = {
+        name:"tom",
+        age:"20",
+        run:function () {
+            console.log(this.name+","+this.age);
+        }
+    }
+    p2.run();
+
+    let product = {title:"哀鳳14",price:39900,saleCount:200,num:2}
+    let arr = [{title:"哀鳳14",price:39900,saleCount:200,num:2},
+        {title:"哀配破咪你",price:15700,saleCount:2000,num:2222},
+        {title:"哀鳳15",price:88888,saleCount:0,num:0}]
+
+    let table = document.querySelector("table")
+    for (let p of arr) {
+        let tr = document.createElement("tr")
+        let titleTD = document.createElement("td")
+        let priceTD = document.createElement("td")
+        let saleCountTD = document.createElement("td")
+        let numTD = document.createElement("td")
+
+        titleTD.innerText = p.title;
+        priceTD.innerText = p.price;
+        saleCountTD.innerText = p.saleCount;
+        numTD.innerText = p.num;
+
+        tr.append(titleTD,priceTD,saleCountTD,numTD);
+        table.append(tr);
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  {{info}}
+<!--  事件綁定 : 簡寫-->
+  <input type="button" value="按鈕1" @click="f()">
+<!--  事件綁定 : 完整版-->
+  <input type="button" value="按鈕2" v-on:click="f()">
+</div>
+<script src="js/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el:"body>div",
+    data:{
+      info:"事件綁定"
+    },
+    methods:{
+      f(){
+        alert("測試成功!!")
+      }
+    }
+
+  })
+</script>
+</body>
+</html>

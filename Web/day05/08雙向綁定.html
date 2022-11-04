@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  {{info}}
+  <input type="text" v-model="info">
+  <hr>
+
+  用戶名:<input type="text" v-model="user.username"><br>
+  密碼:<input type="password" v-model="user.password"><br>
+  <input type="button" value="登入">
+  <script src="js/vue.min.js"></script>
+
+</div>
+
+<script>
+  let v = new Vue({
+    el:"body>div",
+    data:{
+      info:"雙向綁定",
+      user:{
+        username:"",
+        password:""
+      }
+    }
+
+  })
+</script>
+</body>
+</html>

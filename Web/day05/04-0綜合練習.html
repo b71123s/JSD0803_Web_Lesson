@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    img{
+      width: 40%;
+    }
+  </style>
+</head>
+<body>
+
+<h1>個人信息</h1>
+<table border="1">
+  <tr>
+    <td>照片:</td><td id="picture_id"></td>
+  </tr>
+  <tr>
+    <td>姓名:</td><td id="name_id"></td>
+  </tr>
+  <tr>
+    <td>年齡:</td><td id="age_id"></td>
+  </tr>
+  <tr>
+    <td>好友:</td><td id="friend_id"></td>
+  </tr>
+</table>
+
+<input type="button" value="請求數據" onclick="f()">
+
+<script>
+  let person = {pic:"boy.jpg",name:"網帥",age:"23",friend:["老臣","王老級","阿花"]};
+  let picTd = document.querySelector("#picture_id")
+  let nameTd = document.querySelector("#name_id")
+  let ageTd = document.querySelector("#age_id")
+  let friendTd = document.querySelector("#friend_id")
+  function f() {
+
+    let img = document.createElement("img")
+    let imgURL = person.pic
+    img.src = imgURL
+    picTd.append(img)
+
+    nameTd.innerHTML = person.name
+    ageTd.innerHTML = person.age
+
+    let ul = document.createElement("ul")
+    for (let friend of person.friend) {
+      let li = document.createElement("li")
+      li.innerText = friend;
+      ul.append(li);
+    }
+    friendTd.append(ul);
+
+  }
+</script>
+
+
+</body>
+</html>

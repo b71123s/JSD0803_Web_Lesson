@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        body{
+            font: 12px "simhei", Arial, Helvetica, sans-serif;
+            color: #666;
+        }
         body>div{
             width: 1000px;
             margin: 0 auto;
@@ -13,11 +17,19 @@
             width: 611px;
             height: 376px;
             float: left;
+            background-image: url("http://doc.canglaoshi.org/tstore_v1/images/itemCat/study_computer_img1.png");
+            background-repeat: no-repeat;
+            background-position: 90% 80%;
         }
-        #t_r_div{
+        #t_l_div>div{
             width: 375px;
             height: 376px;
             float: right;
+        }
+        #t_l_div>div>.title_p{
+            font-size: 32px;
+            color: #333333;
+            margin-bottom: 12px;
         }
         body>div>div{
             overflow: hidden;
@@ -69,13 +81,12 @@
     <div id="t_div">
         <div id="t_l_div">
             <div>
-                <p>灵越 燃7000系列</p>
-                <p>酷睿双核i5处理器|256GB SSD| 8GB内存<br>
+                <p class="title_p">灵越 燃7000系列</p>
+                <p class="intro_p">酷睿双核i5处理器|256GB SSD| 8GB内存<br>
                     英特尔HD显卡620含共享显卡内存</p>
-                <p>￥4999.00</p>
+                <p class="price_p">￥4999.00</p>
                 <a href="">查看詳情</a>
             </div>
-            <img src="http://doc.canglaoshi.org/tstore_v1/images/itemCat/study_computer_img1.png" alt="">
         </div>
         <div id="t_r_div"></div>
     </div>
