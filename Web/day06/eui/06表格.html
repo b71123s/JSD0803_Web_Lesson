@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%">
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址">
+            </el-table-column>
+        </el-table>
+
+        <el-table :data="arr"
+                  style="width: 500px">
+            <el-table-column
+                    type="index"
+                    label="編號"
+                    width="50px">
+            </el-table-column>
+
+            <el-table-column
+                    prop="title"
+                    label="標題"
+                    width="150px">
+            </el-table-column>
+
+            <el-table-column
+                    prop="price"
+                    label="價格"
+                    width="100px">
+            </el-table-column>
+
+            <el-table-column label="操作">
+                <!--自定义列里面必须添加template标签
+                            scope变量中装着当前行的信息 scope.$index代表当前行的下标
+                            scope.row代表当前行对应的数组里面的对象-->
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                </template>
+            </el-table-column>
+
+        </el-table>
+
+
+    </template>
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                }],
+                arr: [{title: "九等籃球鞋", price: 5000},
+                    {title: "六等籃球鞋", price: 4500},
+                    {title: "八等籃球鞋", price: 5555}]
+            }
+        },
+        methods: {
+            handleDelete(i,product) {
+                v.arr.splice(i,1)
+                v.$message("刪除了"+product.title)
+            }
+
+        }
+    })
+</script>
+</html>

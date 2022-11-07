@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+  <template>
+    <div>
+      <span>美的</span>
+      <el-divider></el-divider>
+      <span>定義</span>
+    </div>
+  </template>
+  <h1>第二種樣式</h1>
+  <template>
+    <div>
+      <span>素，68國分為</span>
+      <el-divider content-position="left">你知道嗎？</el-divider>
+      <span>個等級，其中有13個大國、</span>
+      <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+      <span>個令制國設置國司進行管</span>
+      <el-divider content-position="right">優良條目</el-divider>
+    </div>
+  </template>
+  <h1>第三種樣式</h1>
+  <template>
+    <div>
+      <span>雨纷飛</span>
+      <el-divider direction="vertical"></el-divider>
+      <span>青花瓷</span>
+      <el-divider direction="vertical"></el-divider>
+      <span>八交林</span>
+    </div>
+  </template>
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+  let v = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+
+      }
+    },
+    methods: {
+
+    }
+  })
+</script>
+</html>

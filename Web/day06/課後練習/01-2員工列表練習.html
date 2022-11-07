@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+
+    <input type="text" placeholder="姓名" v-model="newName">
+    <input type="text" placeholder="工資" v-model="newSalary">
+    <input type="text" placeholder="工作" v-model="newJob">
+    <input type="button" value="添加" @click="add()">
+
+    <table border="1">
+        <caption>員工列表</caption>
+        <tr>
+            <th>編號</th>
+            <th>姓名</th>
+            <th>工資</th>
+            <th>工作</th>
+            <th>操作</th>
+        </tr>
+
+        <tr v-for="(per,i) in emp">
+            <td>{{i+1}}</td>
+            <td>{{per.name}}</td>
+            <td>{{per.salary}}</td>
+            <td>{{per.job}}</td>
+            <td><input type="button" value="刪除" @click="del(i)"></td>
+        </tr>
+
+    </table>
+
+</div>
+
+</body>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el: "body>div",
+    data:{
+      emp:{name:"",salary:"",job:""},
+      arr:[],
+      newName:"",
+      newSalary:"",
+      newJob:""
+    },
+    methods:{
+      add(){
+        v.arr.push({name:v.newName,salary:v.newSalary,job:v.newJob})
+      },
+      del(i){
+          v.arr.splice(i,1)
+      }
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div>
+    <h1>員工管理系統</h1>
+
+    <div v-if="!isLogin">
+        <a href="">註冊</a>
+        <a href="javascript: void(0)" @click="login()">登入</a>
+    </div>
+
+
+    <div v-else>
+        <input type="text" placeholder="請輸入員工名:" v-model="newName">
+        <input type="text" placeholder="請輸入權限:" v-model="newPermission">
+        <input type="text" placeholder="請輸入年齡:" v-model="newAge">
+        <input type="button" value="添加" @click="add()">
+        <a href="javascript: void(0)" @click="logout()">退出登入</a>
+    </div>
+
+
+
+    <table border="1">
+        <caption>員工列表</caption>
+        <tr>
+            <th>編號</th>
+            <th>姓名</th>
+            <th>權限</th>
+            <th>年齡</th>
+            <th v-if="isLogin">操作</th>
+        </tr>
+        <tr v-for="(person,i) in arr">
+            <td>{{i+1}}</td>
+            <td>{{person.name}}</td>
+            <td>{{person.permission}}</td>
+            <td>{{person.age}}</td>
+            <td v-if="isLogin" @click="del(i)"><input type="button" value="刪除"></td>
+        </tr>
+    </table>
+
+
+</div>
+
+</body>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el: "body>div",
+    data:{
+        isLogin:false,
+        person:{name:"",permission:"",age:""},
+        arr:[{name: "jason",permission: "超級管理者",age: "33"},
+          {name: "terry",permission: "主管理者",age: "29"},
+          {name: "monica",permission: "次管理者",age: "24"}],
+        newName:"",
+        newPermission:"",
+        newAge: ""
+    },
+    methods:{
+        login() {
+            v.isLogin=true;
+        },
+        logout(){
+            v.isLogin=false;
+        },
+        add(){
+            v.arr.push({name:v.newName,permission:v.newPermission,age:v.newAge})
+        },
+        del(i){
+            v.arr.splice(i,1)
+        }
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <!--1.搭建基礎頁面-->
+    <input type="text" placeholder="請輸入姓名" v-model="name">
+    <input type="text" placeholder="請輸入薪水" v-model="salary">
+    <input type="text" placeholder="請輸入工作" v-model="job">
+    <input type="button" value="添加" @click="add()">
+
+    <table border="1">
+        <caption>員工列表</caption>
+        <tr>
+            <th>編號</th>
+            <th>姓名</th>
+            <th>薪水</th>
+            <th>工作</th>
+            <th>操作</th>
+        </tr>
+
+        <!--2.表格用v-for實現-->
+        <tr v-for="(emp,i) in arr">
+            <td>{{i+1}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.salary}}</td>
+            <td>{{emp.job}}</td>
+            <!--4.新增操作中刪除的業務-->
+            <td><input type="button" value="刪除" @click="del(i)"></td>
+        </tr>
+
+    </table>
+</div>
+
+<!--3.新增添加選項的業務 input框到v的參數，到調用此屬性附值到表格中-->
+</body>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el: "body>div",
+    data:{
+        emp:{name:"",salary:"",job:""},
+        arr:[],
+        name:"",
+        salary:"",
+        job:""
+
+    },
+    methods:{
+        add(){
+            v.arr.push({name:v.name,salary:v.salary,job:v.job})
+        },
+        del(i){
+            v.arr.splice(i,1)
+        }
+    }
+  })
+</script>
+</html>
+
+
+
