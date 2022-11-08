@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+  <style>
+    .c1{
+      border: 1px solid azure; border-radius: 7px; height: 30px;background-color: mediumpurple;
+    }
+    .c2{
+      border: 1px solid azure; border-radius: 7px; height: 30px;background-color: mediumspringgreen;
+    }
+    .c3{
+      border: 1px solid azure; border-radius: 7px; height: 30px;background-color: yellow;
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <h1>1:1</h1>
+  <el-row>
+    <el-col span="12"><div class="c1"></div></el-col>
+    <el-col span="12"><div class="c1"></div></el-col>
+  </el-row>
+
+  <h1>1:2:3</h1>
+  <el-row>
+    <el-col span="4"><div class="c2"></div></el-col>
+    <el-col span="8"><div class="c2"></div></el-col>
+    <el-col span="12"><div class="c2"></div></el-col>
+  </el-row>
+
+  <div style="width: 1200px;margin:0 auto" >
+    <h1>1:3:1:1</h1>
+    <el-row gutter="20">
+      <el-col span="4"><div class="c3"></div></el-col>
+      <el-col span="12"><div class="c3"></div></el-col>
+      <el-col span="4"><div class="c3"></div></el-col>
+      <el-col span="4"><div class="c3"></div></el-col>
+    </el-row>
+  </div>
+
+  <div style="width: 1200px; margin: 0 auto">
+    <h1>1:1:1:1___1200px</h1>
+    <el-row gutter="30">
+      <el-col span="6"><div class="c1"></div></el-col>
+      <el-col span="6"><div class="c1"></div></el-col>
+      <el-col span="6"><div class="c1"></div></el-col>
+      <el-col span="6"><div class="c1"></div></el-col>
+    </el-row>
+  </div>
+
+  <div style="width: 1000px;margin: 0 auto">
+    <h1>2:5:5___1000px</h1>
+    <el-row gutter="10">
+      <el-col span="4"><div class="c2"></div></el-col>
+      <el-col span="10"><div class="c2"></div></el-col>
+      <el-col span="10"><div class="c2"></div></el-col>
+    </el-row>
+  </div>
+
+  <h1>分欄偏移</h1>
+  <el-row>
+    <el-col span="20" offset="2"><div class="c3"></div></el-col>
+  </el-row>
+
+  <el-row gutter="10">
+    <el-col span="6"><img src="imgs/a.jpg" width="100%" height="100%"></el-col>
+    <el-col span="6" offset="6"><img src="imgs/a.jpg" width="100%" height="100%"></el-col>
+    <el-col span="6"><img src="imgs/a.jpg" width="100%" height="100%"></el-col>
+  </el-row>
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+  let v = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+
+      }
+    },
+    methods: {
+
+    }
+  })
+</script>
+</html>

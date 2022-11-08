@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+  <input type="text" placeholder="請輸入姓名" v-model="emp.name">
+  <input type="text" placeholder="請輸入工資" v-model="emp.salary">
+  <input type="text" placeholder="請輸入職業" v-model="emp.job">
+  <el-row>
+    <el-button @click="add()">添加</el-button>
+  </el-row>
+
+  <el-table :data="arr"
+            style="width: 600px">
+    <el-table-column
+            type="index"
+            label="編號"
+            width="50px">
+    </el-table-column>
+
+    <el-table-column
+            prop="name"
+            label="姓名"
+            width="150px">
+    </el-table-column>
+
+    <el-table-column
+            prop="salary"
+            label="工資"
+            width="100px">
+    </el-table-column>
+
+    <el-table-column
+            prop="job"
+            label="工作"
+            width="150px">
+    </el-table-column>
+
+    <el-table-column label="操作">
+      <!--自定义列里面必须添加template标签
+                  scope变量中装着当前行的信息 scope.$index代表当前行的下标
+                  scope.row代表当前行对应的数组里面的对象-->
+      <template slot-scope="scope">
+        <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)">删除
+        </el-button>
+      </template>
+    </el-table-column>
+
+  </el-table>
+
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+  let v = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        emp:{name:"",salary:"",job:""},
+        arr: [{name: "九等籃球鞋", salary: 5000,job:"做好一個鞋子"},
+          {name: "六等籃球鞋", salary: 4500,job:"做好一個鞋子"},
+          {name: "八等籃球鞋", salary: 5555,job:"做好一個鞋子"}]
+      }
+    },
+    methods: {
+        add(){
+          v.arr.push({name:v.emp.name,salary:v.emp.salary,job:v.emp.job})
+        },
+        handleDelete(i,emp){
+          v.arr.splice(i,1)
+          v.$message("刪除了"+emp.name);
+        }
+    }
+  })
+</script>
+</html>
