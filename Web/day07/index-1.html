@@ -9,6 +9,9 @@
             text-decoration: none;
             color: #777;
         }
+        .el-table .el-table__cell{
+            padding: 3px 0;
+        }
     </style>
 </head>
 <body>
@@ -28,25 +31,75 @@
             <a href="">幫助</a><el-divider direction="vertical"></el-divider>
         </div>
         <!--頭部選擇列結束-->
+
         <!--藍色導航列開始-->
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-        style="width: 1200px; margin: 0 auto;background-color: #82c8ec;
-                 active-text-color: rgba(255,255,255,0.3); text-color: white" >
-            <el-menu-item index="1"><a href="">精彩活動</a></el-menu-item>
-            <el-menu-item index="1"><a href="">當季女裝</a></el-menu-item>
-            <el-menu-item index="1"><a href="">品牌男裝</a></el-menu-item>
-            <el-menu-item index="1"><a href="">環球美食</a></el-menu-item>
-            <el-menu-item index="1"><a href="">醫療健康</a></el-menu-item>
-            <el-menu-item index="1"><a href="">美妝彩妝</a></el-menu-item>
-            <el-menu-item index="1"><a href="">母嬰產品</a></el-menu-item>
-        </el-menu>
+        <div style="background-color: #82c8ec">
+            <el-menu text-color="#fff" background-color="#82c8ec"
+                     active-text-color="#fff" mode="horizontal"
+                     style="width: 1200px; margin:0 auto;">
+                <el-menu-item index="1">精彩活動</el-menu-item>
+                <el-menu-item index="2">當季女裝</el-menu-item>
+                <el-menu-item index="3">品牌男裝</el-menu-item>
+                <el-menu-item index="4">環球美食</el-menu-item>
+                <el-menu-item index="5">醫療健康</el-menu-item>
+                <el-menu-item index="6">美妝彩妝</el-menu-item>
+                <el-menu-item index="7">母嬰產品</el-menu-item>
+                <div style="float:right;" >
+                    <el-input style="position: relative; top:10px" placeholder="請輸入查詢內容">
+                        <el-button slot="append" icon="el-icon-search"></el-button>
+                    </el-input>
+                </div>
+            </el-menu>
+        </div>
         <!--藍色導航列結束-->
-
-
-
     </el-header>
 
-    <el-main>
+    <el-main style="width: 1200px; margin: 0 auto;">
+        <el-row gutter="20">
+            <!--輪播圖開始-->
+            <el-col span="18">
+                <el-carousel height="300px">
+                    <el-carousel-item v-for="url in arr">
+                        <img :src="url" alt="" width="100%" height="100%">
+                    </el-carousel-item>
+                </el-carousel>
+            </el-col>
+            <!--輪播圖結束-->
+
+            <!--排行榜開始-->
+            <el-col span="6">
+                <el-card>
+                    <h3>
+                        <i class="el-icon-trophy" style="font-weight: bold;">銷量最高</i>
+                    </h3>
+                    <el-divider></el-divider>
+                    <el-table :data="rankArr">
+
+                        <el-table-column
+                            type="index"
+                            label="排名">
+                        </el-table-column>
+
+                        <el-table-column
+                                prop="title"
+                                label="商品標題">
+                        </el-table-column>
+
+                        <el-table-column
+                                prop="saleCount"
+                                label="銷量">
+                        </el-table-column>
+
+                    </el-table>
+
+                </el-card>
+            </el-col>
+            <!--排行榜結束-->
+        </el-row>
+
+
+
+
 
     </el-main>
 
@@ -65,11 +118,9 @@
 
       <!--中段佈局開始-->
 
-            <!--輪播圖結束-->
 
-            <!--排行榜開始-->
 
-            <!--排行榜結束-->
+
 
 
 
@@ -98,6 +149,12 @@
         data: function () {
             return {
                 activeIndex: '1',
+                arr:["imgs/b1.jpg","imgs/b2.jpg","imgs/b3.jpg"],
+                rankArr:[{title:"小米手機",saleCount:"1234"},
+                    {title:"阿米手機",saleCount:"32"},
+                    {title:"四米手機",saleCount:"5"},
+                    {title:"三米手機",saleCount:"3333"},
+                    {title:"大豆手機",saleCount:"4852"}]
             }
         },
         methods: {
