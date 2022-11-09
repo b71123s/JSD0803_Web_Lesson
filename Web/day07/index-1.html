@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+    <style>
+        header a{
+            text-decoration: none;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+  <!--佈局容器-->
+<el-container>
+    <!--頭部佈局開始-->
+    <el-header height="150px">
+        <!--頭部選擇列開始-->
+        <div style="width: 1200px ; margin: 0 auto">
+            <img src="imgs/logo.png" alt="" style=" width:300px; vertical-align: middle">
+            <a href="">首頁</a><el-divider direction="vertical"></el-divider>
+            <a href="">熱點資訊</a><el-divider direction="vertical"></el-divider>
+            <a href="">商家入住</a><el-divider direction="vertical"></el-divider>
+            <a href="">社會召聘</a><el-divider direction="vertical"></el-divider>
+            <a href="">校園召聘</a><el-divider direction="vertical"></el-divider>
+            <a href="">幫助</a><el-divider direction="vertical"></el-divider>
+        </div>
+        <!--頭部選擇列結束-->
+        <!--藍色導航列開始-->
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+        style="width: 1200px; margin: 0 auto;background-color: #82c8ec;
+                 active-text-color: #fff;" >
+            <el-menu-item index="1"><a href="">精彩活動</a></el-menu-item>
+            <el-menu-item index="1"><a href="">當季女裝</a></el-menu-item>
+            <el-menu-item index="1"><a href="">品牌男裝</a></el-menu-item>
+            <el-menu-item index="1"><a href="">環球美食</a></el-menu-item>
+            <el-menu-item index="1"><a href="">醫療健康</a></el-menu-item>
+            <el-menu-item index="1"><a href="">美妝彩妝</a></el-menu-item>
+            <el-menu-item index="1"><a href="">母嬰產品</a></el-menu-item>
+        </el-menu>
+        <!--藍色導航列結束-->
+
+
+
+    </el-header>
+
+    <el-main>
+
+    </el-main>
+
+    <el-footer>
+
+    </el-footer>
+
+</el-container>
+
+
+
+
+
+      <!--頭部佈局結束-->
+
+
+      <!--中段佈局開始-->
+
+            <!--輪播圖結束-->
+
+            <!--排行榜開始-->
+
+            <!--排行榜結束-->
+
+
+
+            <!--商品列表標題-->
+
+            <!--商品列表結束-->
+
+
+        <!--中段結束-->
+
+        <!--尾端開始-->
+
+        <!--尾端結束-->
+
+
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                activeIndex: '1',
+            }
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    })
+</script>
+</html>
