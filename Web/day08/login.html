@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+  <style>
+    body{
+      margin: 0;
+      background-image: url("imgs/bg.jpg");
+      background-size: cover;
+      text-align: center;
+    }
+    h1{
+      font-size: 72px;
+      color: #0096dc;
+      margin-bottom: 0;
+    }
+    img{
+      width: 100px;
+    }
+    h2{
+      font-size: 32px;
+      color: #0096dc;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <h1>歡迎來到酷鯊商城</h1>
+  <img src="imgs/shark.png" alt="">
+  <h2>CoolSharkMall</h2>
+  <el-card style="width: 600px; height:300px;
+            margin: 0 auto; background-color: rgba(255,255,255,0.3)">
+    <el-form label-width="80px" style="width: 400px; margin: 50px auto">
+      <el-form-item label="用戶名">
+        <el-input type="text" v-model="user.username" placeholder="請輸入用戶名"></el-input>
+      </el-form-item>
+      <el-form-item label="密碼" >
+        <el-input type="password" v-model="user.password" placeholder="請輸入密碼"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" style="position:relative;left:-35px">登入</el-button>
+      </el-form-item>
+    </el-form>
+
+
+  </el-card>
+
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+  let v = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        user:{
+          username:"",
+          password:""
+
+        }
+      }
+    },
+    methods: {
+
+    }
+  })
+</script>
+</html>

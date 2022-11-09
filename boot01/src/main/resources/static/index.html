@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>工程首頁</h1>
+
+<!--相對於頁面所在位置-->
+<a href="hello">相對路徑</a>
+
+<!--絕對路徑中的第一個/代表工程的根目錄 例:http://localhost:8080/-->
+<!--不管你路徑是這兩種哪個絕對路徑都是上面 "http://localhost:8080/hello" or "http://localhost:8080/a/b/c/hello"-->
+<a href="/hello">絕對路徑1</a>
+
+<!--一般訪問站外資源用-->
+<a href="http://localhost:8080/hello">絕對路徑1</a>
+
+<!--form表單發請求-->
+<h2>通過form表單發請求</h2>
+<form action="/hello">
+    <input type="text" name="info">
+    <input type="submit">
+</form>
+
+<a href="/param.html">傳參測試頁面</a>
+
+<a href="/bmi.html">BMI指數測試</a>
+
+</body>
+</html>
