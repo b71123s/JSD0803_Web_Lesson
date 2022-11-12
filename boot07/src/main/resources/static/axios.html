@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>異步請求測試</h1>
+
+<div>
+    {{info}}
+  <input type="button" value="異步get請求" @click="f1()">
+  <input type="button" value="異步post請求" @click="f2()">
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+  let v = new Vue({
+    el: "body>div",
+    data:{
+        info:"異步測試"
+    },
+    methods:{
+        f1(){
+            axios.get("/helloGet?info=abc&age=18").then(function (response) {
+                // alert(response.data);
+                v.info = response.data;
+            })
+        },
+        f2(){
+            let p = {title:"手機",price:5000,num:55};
+            axios.post("/helloPost",p).then(function (response) {
+                console.log(response)
+                alert(response.data);
+            })
+        }
+    }
+  })
+</script>
+</body>
+</html>

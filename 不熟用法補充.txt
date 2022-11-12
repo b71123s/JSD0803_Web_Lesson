@@ -1,0 +1,30 @@
+WEB
+element UI
+
+slot:插口
+用法 : 在使用複合型輸入框的時候，我們需要在input輸入框的前面或者後面添加一個符號
+或者button按鈕，如何快速的添加文字或按鈕並且不用再自己設置樣式呢，
+slot設置了input可前置或後置元素，一般為標籤或按鈕。
+
+範例 :
+slot="predend" 、 slot="append"
+
+參考 :
+https://blog.csdn.net/u011332271/article/details/105209673
+https://blog.csdn.net/qq_41257129/article/details/95045098
+
+
+
+Spring MVC框架 (相關類)
+
+~ ResultSet類別 ~
+-------------------------------
+.getString()方法 : 獲取指定列的字段
+getString(int columnIndex)  or  getString(String columnLabel)
+用法說明: 放入數據表中 第?列 數據值，或是直接給字段
+-------------------------------
+.getInt()方法: 將得到字符流轉成整數
+用法說明: getInt將得到字符流轉成整數
+
+
+http://c.biancheng.net/view/4798.html
