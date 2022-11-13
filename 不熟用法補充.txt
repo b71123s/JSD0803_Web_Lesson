@@ -28,3 +28,7 @@ getString(int columnIndex)  or  getString(String columnLabel)
 
 
 http://c.biancheng.net/view/4798.html
+
+
+Mybatis + Spring
+1.Mapper.XXXMapper創建時要用 "介面"
