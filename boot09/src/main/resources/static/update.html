@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h1>修改商品頁面</h1>
+        <input type="text" v-model="p.id" placeholder="商品id">
+        <input type="text" v-model="p.title" placeholder="商品標題">
+        <input type="text" v-model="p.price" placeholder="商品價格">
+        <input type="text" v-model="p.num" placeholder="商品庫存">
+        <input type="button" value="修改">
+    </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+             p:{
+                 id:"",title:"",price:"",num:""
+             }
+        },
+        methods:{
+            update(){
+                axios.post("/updata",v.p).then(function () {
+                    alert("修改完成!")
+                    location.href="/list.html";
+                })
+            }
+        },
+        created:function () {
+            // location.search會得到網址參數 ?id=5
+            // 通過商品id查詢商品的詳細信息
+            axios.get("/selectById"+location.search).then(function (response) {
+                //服务器返回的是装着商品详细信息的JSON字符串,axios框架会自动
+                //将JSON字符串转成JS对象
+                v.p = response.data;
+            })
+
+        }
+    })
+</script>
+</body>
+</html>

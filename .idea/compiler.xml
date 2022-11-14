@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jsd0803" />
+        <module name="boot09" />
         <module name="boot05-1" />
+        <module name="boot08" />
         <module name="boot01-2" />
         <module name="boot07" />
         <module name="boot06" />
+        <module name="boot09-1" />
         <module name="boot01" />
         <module name="boot3" />
         <module name="JSD2208_Web_Lesson" />

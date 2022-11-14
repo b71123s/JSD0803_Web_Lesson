@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table border="1">
+        <caption>商品列表</caption>
+        <tr>
+            <th>id</th><th>標題</th><th>價格</th><th>庫存</th><th>操作</th>
+        </tr>
+        <tr v-for="p in arr">
+            <td>{{p.id}}</td><td>{{p.title}}</td><td>{{p.price}}</td><td>{{p.num}}</td>
+            <!--废掉超链接跳转功能-->
+            <td><a :href="'update.html?id='+p.id">修改</a><a href="javascript:void(0)" @click="del(p.id)">删除</a></td>
+        </tr>
+    </table>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            arr:[]
+        },
+        methods:{
+            del(id){
+                if (confirm("您確認刪除此商品嗎?")){
+                    //发出异步get请求,如果传递1个参数并且不是敏感信息 使用get
+                    axios.get("/delete?id="+id).then(function (response) {
+                        alert("删除完成!");
+                        //刷新页面
+                        location.reload();
+                    })
+                }
+            }
+        },
+        created:function () {
+            // 此方法是vue對象初始化過程中執行的方法
+            axios.get("/select").then(function (response) {
+                // 當axios框架發現服務器想應的是JSON格式字符串時，會自動將字符串傳換成數組或JS對象
+                v.arr = response.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>

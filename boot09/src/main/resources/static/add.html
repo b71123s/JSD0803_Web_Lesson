@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>添加商品</h1>
+    <input type="text" name="title" v-model="product.title" placeholder="請輸入商品">
+    <input type="text" name="price" v-model="product.price" placeholder="請輸入價格">
+    <input type="text" name="num" v-model="product.num" placeholder="請輸入庫存">
+    <input type="button" value="添加商品" @click="insert()">
+</div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            product:{
+                title:"",
+                price:"",
+                num:""
+            }
+
+        },
+        methods:{
+            insert(){
+                axios.post("/insert",v.product).then(function (response) {
+                    alert("添加完成");
+                    location.href="/"
+                })
+            }
+        }
+    })
+</script>
+</html>
