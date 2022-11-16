@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>微博列表頁面</h1>
+    <div v-for="weibo in arr">
+        <h3>{{weibo.content}}</h3>
+        <img :src="weibo.url" width="100">
+    </div>
+</div>
+<srcipt src="https://unpkg.com/axios/dist/axios.min.js"></srcipt>
+<script src="https://lib.baomitu.com/vue/2.7.0/compiler-sfc.js"></script>
+<script>
+  let v = new Vue({
+    el: "body>div",
+    data:{
+
+    },
+    methods:{
+
+    },
+      created:function () {
+          axios.get("/select").then(function (response) {
+              v.arr = response.data;
+
+          })
+      }
+  })
+</script>
+</body>
+</html>

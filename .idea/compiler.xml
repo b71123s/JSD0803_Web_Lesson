@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="boot09-2" />
         <module name="jsd0803" />
         <module name="boot09" />
         <module name="boot05-1" />
@@ -16,9 +17,12 @@
         <module name="boot09-1" />
         <module name="boot01" />
         <module name="boot3" />
+        <module name="boot11" />
+        <module name="boot10" />
         <module name="JSD2208_Web_Lesson" />
         <module name="testmaven" />
         <module name="boot05" />
+        <module name="boot11-1" />
         <module name="boot01-1" />
         <module name="boot04" />
         <module name="jsd0803_Web" />
@@ -28,6 +32,7 @@
     <bytecodeTargetLevel>
       <module name="boot03" target="1.8" />
       <module name="boot05_1" target="1.8" />
+      <module name="boot10-1" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -40,6 +45,11 @@
       <module name="boot05_1" options="-parameters" />
       <module name="boot06" options="-parameters" />
       <module name="boot07" options="-parameters" />
+      <module name="boot09-2" options="-parameters" />
+      <module name="boot10" options="-parameters" />
+      <module name="boot10-1" options="-parameters" />
+      <module name="boot11" options="-parameters" />
+      <module name="boot11-1" options="-parameters" />
       <module name="boot3" options="-parameters" />
     </option>
   </component>
