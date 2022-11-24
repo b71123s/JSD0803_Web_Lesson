@@ -1,4 +1,4 @@
-package cn.tedu.coolshark.controller;
+package cn.tedu.coolshark.pojo.dto;
 
 import java.util.Date;
 

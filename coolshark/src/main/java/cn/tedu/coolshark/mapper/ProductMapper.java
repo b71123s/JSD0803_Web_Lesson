@@ -1,6 +1,6 @@
 package cn.tedu.coolshark.mapper;
 
-import cn.tedu.coolshark.controller.ProductUpdateDTO;
+import cn.tedu.coolshark.pojo.dto.ProductUpdateDTO;
 import cn.tedu.coolshark.pojo.entity.Product;
 import cn.tedu.coolshark.pojo.vo.*;
 

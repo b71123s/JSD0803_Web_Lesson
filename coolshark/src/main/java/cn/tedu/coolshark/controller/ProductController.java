@@ -2,6 +2,7 @@ package cn.tedu.coolshark.controller;
 
 import cn.tedu.coolshark.mapper.ProductMapper;
 import cn.tedu.coolshark.pojo.dto.ProductDTO;
+import cn.tedu.coolshark.pojo.dto.ProductUpdateDTO;
 import cn.tedu.coolshark.pojo.entity.Product;
 import cn.tedu.coolshark.pojo.vo.*;
 import org.springframework.beans.BeanUtils;
