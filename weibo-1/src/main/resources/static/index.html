@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>微博首頁</h1>
+<div>
+
+    <div v-if="isLogin">
+        <h2>歡迎 {{user.nickname}} 回來!</h2>
+        <a href="javascript:void(0)" @click="logout()">退出登入</a>
+        <a href="/send.html">發微博</a>
+    </div>
+    <div v-else>
+        <a href="/reg.html">註冊</a>
+        <a href="/login.html">登入</a>
+    </div>
+    <hr>
+
+    <div v-for="">
+        {{user.nickname}}說
+    </div>
+
+
+
+
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            isLogin:false,
+            user:{},
+
+        },
+        methods:{
+            logout(){
+                if (confirm("您確認要退出登入嗎?")){
+                    axios.get("/logout").then(function () {
+                        v.isLogin = false;
+                    })
+                }
+            }
+        },
+        created:function () {
+            axios.get("/currentUser").then(function (response) {
+                v.isLogin = response.data==""?false:true;
+                v.user = response.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>

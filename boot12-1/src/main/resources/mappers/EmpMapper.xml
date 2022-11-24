@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.boot121.mapper.EmpMapper">
+
+    <insert id="insert">
+        INSERT INTO newemp VALUES(NULL,#{name},#{salary},#{job})
+    </insert>
+
+    <insert id="inserts">
+        INSERT INTO newemp VALUES
+       <foreach collection="list" item="emp" separator=",">
+           (null,#{emp.name},#{emp.salary},#{emp.job})
+       </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM newemp WHERE id=#{id}
+    </delete>
+
+    <!--UPDATE newemp
+    <set>
+        <if test="name!=null">#{name},</if>
+        <if test="salary!=null">#{salary},</if>
+        <if test="job!=null">#{job}</if>
+    </set>-->
+
+</mapper>

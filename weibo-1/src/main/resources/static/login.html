@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>登入頁面</h1>
+<div>
+    <input type="text" name="username" v-model="user.username" placeholder="用戶名">
+    <input type="text" name="password" v-model="user.password" placeholder="密碼">
+    <input type="button" value="登入" @click="login()">
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            user:{username:"",password:""}
+        },
+        methods:{
+            login(){
+                axios.post("/login",v.user).then(function (response){
+                    if (response.data==1){
+                        alert("登入成功")
+                        location.href="/"
+                    }else if(response.data==2){
+                        alert("密碼錯誤，請重新輸入")
+                    }else {
+                        alert("查無此用戶!")
+                    }
+
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

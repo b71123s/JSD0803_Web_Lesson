@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="background-color: #0095d7">
+            <h1 style="color: white;font-size: 22px">
+                CoolShark商城後台管理系统
+                <span v-if="user.nickname!=null" style="float: right;font-size: 15px">歡迎 {{user.nickname}} 回来
+                    <a href="javascript:void (0)" @click="logout()">退出登入</a>
+                </span>
+            </h1>
+        </el-header>
+        <el-container>
+            <el-aside width="200px" style="overflow:hidden;">
+               <!--导航菜单开始-->
+                <el-menu @select="handleSelect">
+                    <el-submenu index="1">
+                        <template slot="title">
+                            <i class="el-icon-s-flag"></i>
+                            <span>分類管理</span>
+                        </template>
+                        <el-menu-item index="1-1">分類列表</el-menu-item>
+                        <el-menu-item index="1-2">添加分類</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            <i class="el-icon-picture"></i>
+                            <span>輪播圖管理</span>
+                        </template>
+                        <el-menu-item index="2-1">輪播圖列表</el-menu-item>
+                        <el-menu-item index="2-2">添加輪播圖</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-shopping-cart-2"></i>
+                            <span>商品管理</span>
+                        </template>
+                        <el-menu-item index="3-1">商品列表</el-menu-item>
+                        <el-menu-item index="3-2">添加商品</el-menu-item>
+                    </el-submenu>
+                </el-menu>
+               <!--导航菜单结束-->
+            </el-aside>
+            <el-main>
+                <!--分类表格-->
+                <el-table v-if="currentIndex=='1-1'" :data="categoryArr">
+                    <el-table-column type="index" label="编号"></el-table-column>
+                    <el-table-column prop="name" label="分类名称" width="180"></el-table-column>
+                    <el-table-column label="操作">
+                        <!--自定义列里面必须添加template标签
+                        scope变量中装着当前行的信息 scope.$index代表当前行的下标
+                        scope.row代表当前行对应的数组里面的对象-->
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    type="success"
+                                    @click="categoryUpdate(scope.$index, scope.row)">修改</el-button>
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="categoryDelete(scope.$index, scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!--轮播图表格-->
+                <el-table v-if="currentIndex=='2-1'" :data="bannerArr">
+                    <el-table-column type="index" label="编号"></el-table-column>
+                    <el-table-column label="轮播图" width="200">
+                        <template slot-scope="scope">
+                            <!--scope.row得到的是bannerArr数组里面的对象-->
+                            <img :src="scope.row.url" width="150" alt="">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <!--自定义列里面必须添加template标签
+                        scope变量中装着当前行的信息 scope.$index代表当前行的下标
+                        scope.row代表当前行对应的数组里面的对象-->
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    type="success"
+                                    @click="bannerUpdate(scope.$index, scope.row)">修改</el-button>
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="bannerDelete(scope.$index, scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!--商品表格-->
+                <el-table v-if="currentIndex=='3-1'" :data="productArr">
+                    <el-table-column type="index" label="编号"></el-table-column>
+                    <el-table-column prop="title" label="商品标题"></el-table-column>
+                    <el-table-column prop="price" label="商品价格"></el-table-column>
+                    <el-table-column prop="saleCount" label="商品销量"></el-table-column>
+                    <el-table-column label="图片" width="200">
+                        <template slot-scope="scope">
+                            <!--scope.row得到的是bannerArr数组里面的对象-->
+                            <img :src="scope.row.url" width="50" alt="">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <!--自定义列里面必须添加template标签
+                        scope变量中装着当前行的信息 scope.$index代表当前行的下标
+                        scope.row代表当前行对应的数组里面的对象-->
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    type="success"
+                                    @click="productUpdate(scope.$index, scope.row)">修改</el-button>
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="productDelete(scope.$index, scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                currentIndex:"1-1",
+                categoryArr:[],
+                bannerArr:[],
+                productArr:[],
+                user:{}
+            }
+        },
+        methods: {
+            logout(){
+                if (confirm("確認退出登入嗎?")){
+                    axios.get("/logout").then(function () {
+                        location.href="/"
+                    })
+                }
+            },
+            productUpdate(i,product){
+                // 跳轉到商品修改頁面
+                location.href="/updateProduct.html?id="+product.id;
+            },
+            bannerUpdate(i,banner){
+                location.href="/updateBanner.html?id="+banner.id;
+            },
+            // (下標,對象)
+            categoryUpdate(i,c){
+                let name = prompt("請輸入新的分類名稱")
+                if (name==null){
+                    return;
+                }
+                if (name.trim()==""){
+                    v.$message.error("分類名不能空")
+                    return;
+                }
+                let category = {id:c.id,name:name}
+                axios.post("/category/update",category).then(function () {
+                    c.name=name; //讓葉面改變
+                })
+
+            },
+            categoryDelete(i,c){
+                if (confirm("您確定要刪除此分類嗎?")){
+                    axios.get("/category/delete?id="+c.id).then(function (){
+                        v.$message("删除分类:"+c.name);
+                        v.categoryArr.splice(i,1);
+                    })
+                }
+            },
+            bannerDelete(i,b){
+                if (confirm("您確認刪除此輪播圖嗎?")){
+                    axios.get("/banner/delete?id="+b.id).then(function () {
+                        v.$message("删除輪播圖:"+b.id);
+                        v.bannerArr.splice(i,1);
+                    })
+                }
+
+
+            },
+            productDelete(i,p){
+                if (confirm("您確認刪除此商品嗎?")){
+                    axios.get("/product/delect").then(function () {
+                        v.$message("删除商品:"+p.title);
+                        v.productArr.splice(i,1);
+                    })
+                }
+
+            },
+            handleSelect(key,keyPath){
+                if (key=="1-2") {
+                    let name = prompt("請輸入添加分類的名稱")
+                    console.log("分類名" + name)
+                    if (name == null) {
+                        return;
+                    }
+                    if (name.trim()==""){
+                        v.$message.error("請輸入分類名稱")
+                        return;
+                    }
+                    axios.get("/category/insert?name="+name).then(function (response){
+                        v.$message.success("添加完成!");
+                        v.categoryArr = response.data;
+                    })
+                }else if(key=="2-2"){
+                    location.href="/insertBanner.html";
+                }else if(key=="3-2"){
+                    v.$message("添加商品");
+                    location.href="/insertProduct.html";
+                }else{
+                    v.currentIndex = key;
+                }
+            }
+        },
+        created:function () {
+            axios.get("/category/select").then(function (response) {
+                v.categoryArr = response.data;
+            })
+            axios.get("/banner/select").then(function (response) {
+                v.bannerArr = response.data;
+
+                axios.get("/product/select").then(function (response) {
+                    v.productArr = response.data;
+
+                })
+                axios.get("/currentUser").then(function (response) {
+                    v.user = response.data;
+                    if (response.data==""){
+                        alert("請先登入!")
+                        location.href="login.html"
+                    }
+                })
+            })
+        }
+    })
+</script>
+</html>

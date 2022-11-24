@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+    <style>
+        body {
+            margin: 0; /*去掉自带的外边距*/
+            background-image: url("imgs/bg.jpg");
+            background-size: cover; /*设置封面尺寸*/
+            text-align: center;
+        }
+        h1{
+            font-size: 72px;
+            color: #0096dc;
+            margin-bottom: 0;
+        }
+        img{
+            width: 100px;
+        }
+        h2{
+            font-size: 32px;
+            color: #0096dc;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>歡迎來到酷鯊商城</h1>
+    <img src="imgs/shark.png" alt="">
+    <h2>CoolSharkMall</h2>
+    <el-card style="width: 600px;height: 300px;
+        margin: 0 auto;background-color: rgba(255,255,255,0.3)">
+        <!--label-width设置显示文本的宽度,如果不设置则上下结构显示-->
+        <el-form label-width="80px" style="width: 400px;margin: 50px auto">
+            <el-form-item label="用戶名">
+                <el-input type="text" v-model="user.username" placeholder="請輸入用戶名"></el-input>
+            </el-form-item>
+            <el-form-item label="密碼">
+                <el-input type="password" @keydown.native.enter="login()" v-model="user.password" placeholder="請輸入密碼"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-checkbox v-model="user.rem">記住用戶名和密碼</el-checkbox>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="login()"
+                           style="position: relative;left: -35px">登入</el-button>
+            </el-form-item>
+        </el-form>
+    </el-card>
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                user:{
+                    username:"",
+                    password:"",
+                    rem:"false"
+                }
+            }
+        },
+        methods: {
+            login(){
+                axios.post("/login",v.user).then(function (response) {
+                    if (response.data==1){
+                        location.href="/admin.html"; //跳转到後臺管理頁
+                    }else if(response.data==2){
+                        // $message是element的用法，跟alert類似效果
+                        v.$message.error("用户名不存在!");
+                    }else{
+                        v.$message.error("密碼錯誤!");
+                    }
+                })
+            }
+        },
+        created:function () {
+            let count = 0;
+            let arr = document.cookie.split(";");
+            for (let cookie of arr) {
+                let cookieArr = cookie.split("=");
+                let key = cookieArr[0].trim();
+                let value = cookieArr[1];
+                if (key=='username'){
+                    // 這裡用v.訪問對象會失敗，因為還沒初始化完
+                    // 但之前在axios發請求後v.卻可以，是因為他開啟一個子線程去處理請求
+                    // 而請求完，初始化就已經完成了，所以V.才可以正常調用
+                    // 但如果要在這調用要用this
+                    this.user.username = value;
+                    count++
+                }else if(key=='password'){
+                    this.user.password = value;
+                    count++
+                }
+                //当count值等于2时说明之前记住了用户名和密码
+                //如果值不是2 是1 或是0  则不需要打钩
+                this.user.rem = count==2;
+            }
+        }
+    })
+</script>
+</html>

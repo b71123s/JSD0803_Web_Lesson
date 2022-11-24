@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--element裡面的方法可不加括號，goBack-->
+    <el-page-header
+            style="background-color: #0095d7;color: white;
+                    line-height: 60px"
+            @back="goBack" content="添加商品">
+    </el-page-header>
+
+    <el-card style="width: 600px;height: 700px;margin: 0 auto">
+        <el-form label-width="80px">
+
+            <el-form-item label="商品標題">
+                <el-input v-model="p.title" type="text"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品價格">
+                <el-input v-model="p.price" type="text"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品原價">
+                <el-input v-model="p.oldPrice" type="text"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品銷量">
+                <el-input v-model="p.saleCount" type="text"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品庫存">
+                <el-input v-model="p.num" type="text"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品分類">
+                <el-select v-model="p.categoryId">
+                    <!--  當選中其中一個選項時，會給定綁定的ID值 :value="c.id"，賦給p.categoryId  -->
+                    <el-option v-for="c in arr" :label="c.name" :value="c.id"></el-option>
+                </el-select>
+            </el-form-item>
+
+            <el-form-item label="商品圖片">
+                <el-upload
+                        action="/upload"
+                        name="pic"
+                        limit="1"
+                        list-type="picture-card"
+                        :on-success="handleSuccess"
+                        :on-preview="handlePictureCardPreview"
+                        :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </el-form-item>
+
+
+            <el-form-item>
+                <el-button type="success" @click="insert()">添加商品</el-button>
+            </el-form-item>
+
+        </el-form>
+    </el-card>
+
+
+
+
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- import Vue before Element -->
+<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+<script>
+    let v = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                dialogImageUrl: '',
+                dialogVisible: false,
+                p:{
+                    title:"",
+                    url:"",
+                    price:"",
+                    oldPrice:"",
+                    saleCount:"",
+                    num:"",
+                    categoryId:""
+                },
+                arr:[]
+            }
+        },
+        methods: {
+            goBack(){
+                history.back();//返回上一页面
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+                axios.get("/remove?url="+v.p.url).then(function (response) {
+                    v.$message("刪除成功!")
+                    //删除后url 应该清空  代表没有选择上传的图片
+                    v.p.url="";
+                })
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            handleSuccess(response,file,fileList){
+                // file.response得到服务器上传成功后相应的图片路径
+                // file.response & response得到結果是一樣的
+                v.p.url=file.response;
+            },
+            insert(){
+                if (v.p.url==""){
+                    v.$message("請選則上傳圖片!")
+                    return;
+                }
+                // 發商品請求
+                axios.post("/product/insert",v.p).then(function () {
+                    location.href="/admin.html";
+                })
+            }
+        },
+        created:function () {
+            axios.get("/category/select").then(function (response) {
+                v.arr = response.data;
+
+            })
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+</head>
+<body>
+    <div>
+    <h1>發點微薄</h1>
+
+        <el-upload
+                action="/upload"
+                name="pic"
+                limit="10"
+                list-type="picture-card"
+                :on-preview="handlePictureCardPreview"
+                :on-success="handleSuccess"
+                :on-remove="handleRemove">
+            <i class="el-icon-plus"></i>
+        </el-upload>
+        <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog>
+
+        <input type="text" v-model="weibo.content" placeholder="發點啥唄...">
+        <input type="button" value="一鍵入魂" @click="send()">
+
+
+
+
+    </div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+
+    <script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            dialogImageUrl: '',
+            dialogVisible: false,
+            weibo:{
+                content:"",
+                urls:""
+            },
+            fileList:[]
+        },
+        methods:{
+            send(){
+                if (v.fileList==0){
+                    alert("請選擇上傳圖片!")
+                    return;
+                }
+                // fL得到多張圖片路徑，宣告數組
+                let arr = []
+                // 片立每張圖片文件路徑，添加到數組裡面
+                for (let file of v.fileList) {
+                    // file.response是得到上傳成功時候，服務器響應圖片路徑
+                    // 而上傳成功("/upload")時，服務器最後返回了圖片絕對路徑http...8080/fileName
+                    arr.push(file.response)
+                }
+                // 將數組轉換成字串方便保淳
+                v.weibo.urls =  arr.toString()
+                console.log(v.weibo.urls);
+                // 發出微薄請求
+                // 送出微薄屬性，成功返回發布完成(結束跳轉回首頁)，失敗請登入(結束跳轉回登入頁)
+                axios.post("/weibo/insert",v.weibo).then(function (response) { // 要加個insert路徑區分
+                    if (response.data==1){
+                        alert("發布成功!")
+                        location.href="/"
+                    }else {
+                        alert("請先登入!")
+                        location.href="login.html"
+                    }
+
+                })
+
+            },
+            handleSuccess(response,file,fileList){
+                v.fileList = fileList;
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+                v.fileList = fileList;
+                axios.get("/weibo/remove?url="+file.response).then(function () {
+                    console.log("服務器文件刪除完成!")
+                })
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+
+            }
+        }
+    })
+    </script>
+</body>
+</html>

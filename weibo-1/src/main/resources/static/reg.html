@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>註冊頁面</h1>
+    <input type="text" name="username" v-model="user.username" placeholder="用戶名">
+    <input type="text" name="password" v-model="user.password" placeholder="密碼">
+    <input type="text" name="nickname" v-model="user.nickname" placeholder="暱稱">
+    <input type="button" value="註冊" @click="reg()">
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            user:{username:"",password:"",nickname:""}
+        },
+        methods:{
+            reg(){
+                axios.post("/reg",v.user).then(function (response) {
+                    if (response.data==2){
+                        alert("用戶已註冊!")
+                    }else {
+                        alert("註冊成功!!!")
+                        location.href="/"
+                    }
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

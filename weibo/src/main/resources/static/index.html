@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>微博首頁</h1>
+<div>
+    <div v-if="isLogin">
+        <h3>歡迎{{user.nickname}}回來!</h3>
+        <a href="javascript:void(0)" @click="logout()">退出登入</a>
+        <a href="/send.html">發微博</a>
+    </div>
+    <div v-else>
+        <a href="/reg.html">註冊</a>
+        <a href="/login.html">登入</a>
+    </div>
+
+    <h2>微博列表</h2>
+    <hr>
+    <div v-for="weibo in arr">
+
+        <h3>
+            <a :href="'/detail.html?id='+weibo.id">
+            {{weibo.nickname}}說:{{weibo.content}}
+            </a>
+        </h3>
+        <img v-for="url in weibo.urlArr" :src="url" alt="" width="100" height="100">
+    </div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+    let v = new Vue({
+        el:"body>div",
+        data:{
+            isLogin:false,
+            user:{},
+            arr:[]
+        },
+        methods:{
+            logout(){
+                if (confirm("您確定要退出登入嗎?")){
+                    axios.get("/logout").then(function () {
+                        v.isLogin=false;
+                    })
+                }
+            }
+        },
+        created:function (){
+            axios.get("/currentUser").then(function (response){
+            // alert(response.data)
+                v.isLogin = response.data==""?false:true;
+                v.user = response.data;
+            })
+            axios.get("/weibo/select").then(function (response) {
+                v.arr = response.data;
+                for (let weibo of v.arr){
+                    weibo.urlArr = weibo.urls.split(",");
+                }
+            })
+        }
+    })
+</script>
+
+</body>
+</html>

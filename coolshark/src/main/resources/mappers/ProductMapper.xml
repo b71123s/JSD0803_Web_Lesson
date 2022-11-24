@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.coolshark.mapper.ProductMapper">
+
+    <!--新增要的是屬性名-->
+    <insert id="insert">
+        INSERT INTO product VALUES
+            (
+            null,#{title},#{url},#{price},#{oldPrice},#{saleCount}
+            ,#{num},#{viewCount},#{created},#{categoryId}
+            )
+    </insert>
+
+    <!--收尋要的是字段名-->
+    <select id="selectForAdmin" resultMap="productAdminRM">
+        select
+            id,title,url,price,sale_count
+        from product
+    </select>
+
+    <resultMap id="productAdminRM"
+               type="cn.tedu.coolshark.pojo.vo.ProductAdminVO">
+               <result column="sale_count" property="saleCount"></result>
+    </resultMap>
+
+    <select id="selectUrlById" resultType="string">
+        select url from product where id={id}
+    </select>
+
+    <delete id="deleteById">
+        delete from product where id=#{id}
+    </delete>
+
+    <select id="selectForIndex" resultType="cn.tedu.coolshark.pojo.vo.ProductIndexVO">
+        select id,title,url,price,old_price,sale_count from product
+    </select>
+
+<!--    <resultMap id="ProductIndexRM" type="cn.tedu.coolshark.pojo.vo.ProductIndexVO">
+        <result column="old_price" property="oldPrice"></result>
+    </resultMap>-->
+
+    <select id="selectForTop" resultType="cn.tedu.coolshark.pojo.vo.ProductTopVO">
+        select id,title,sale_count
+        from product order by sale_count desc  limit 0,6
+    </select>
+
+    <select id="selectById" resultType="cn.tedu.coolshark.pojo.vo.ProductDetailVO">
+        select id,title,url,price,old_price,sale_count,view_count,created from product where id=#{id}
+    </select>
+
+    <select id="selectByCid" resultType="cn.tedu.coolshark.pojo.vo.ProductIndexVO">
+        SELECT id,title,url,price,old_price,sale_count
+        FROM product
+        WHERE category_id=#{id}
+    </select>
+
+
+    <!--寫 #{羽絨服} ，會自動轉換成 '羽絨服'
+    所以當寫 '%#{wd}%' 想代表收所羽絨服時候 會變成這樣 WHERE title like '%'wd'%' ，會報錯
+    必須改成 like concat('%',#{wd},'%') 會轉換成 like '%wd%' 即為 like '%羽絨服%' 才正確-->
+    <select id="selectByWd" resultType="cn.tedu.coolshark.pojo.vo.ProductIndexVO">
+        SELECT id,title,url,price,old_price,sale_count
+        FROM product
+        WHERE title like concat('%',#{wd},'%')
+    </select>
+
+    <select id="selectForUpdateById" resultType="cn.tedu.coolshark.pojo.vo.ProductUpdateVO">
+        select id,title,url,price,old_price,sale_count,num,category_id from product where id=#{id}
+    </select>
+
+    <update id="update">
+        update product set title=#{title}, price=#{price},old_price=#{oldPrice},
+                           sale_count=#{saleCount},num=#{num},category_id=#{categoryId},
+                           url=#{url} where id=#{id}
+    </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

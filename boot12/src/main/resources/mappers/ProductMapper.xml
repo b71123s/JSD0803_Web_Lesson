@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.boot12.mapper.ProductMapper">
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM product
+    </select>
+
+    <!--foreach是循環遍歷標籤
+    collection如果是list則寫list，否則就是用array
+    item是代表集合中的變量名(自訂義)
+    separator是分割符-->
+    <delete id="deleteByIds1">
+        DELETE FROM product
+        WHERE id in (
+            <foreach collection="list"  item="id"   separator=",">
+                #{id}
+            </foreach>
+            )
+    </delete>
+
+    <delete id="deleteByIds2">
+        DELETE FROM product
+        WHERE id in (
+        <foreach collection="array"  item="id"   separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <delete id="deleteByIds3">
+        DELETE FROM product
+        WHERE id in (
+        <foreach collection="array"  item="id"   separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <insert id="insertProducts">
+        INSERT INTO product VALUES
+        <foreach collection="list"  item="p" separator=",">
+            (null,#{p.title},#{p.price},#{p.num})
+        </foreach>
+    </insert>
+
+    <update id="dynamicUpdate">
+        UPDATE product
+        <set>
+            <if test="title!=null">title=#{title}</if>
+            <if test="price!=null">price=#{price}</if>
+            <if test="num!=null">num=#{num}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--sql語句重用寫法-->
+    <select id="select" resultType="cn.tedu.boot12.entity.Product">
+        <include refid="query"></include>
+    </select>
+
+    <select id="selectById" resultType="cn.tedu.boot12.entity.Product">
+        <include refid="query"></include>
+        WHERE id=#{id}
+    </select>
+
+    <!--sql語句封裝-->
+    <sql id="query">
+        SELECT id,title,price,num FROM product
+    </sql>
+
+</mapper>
